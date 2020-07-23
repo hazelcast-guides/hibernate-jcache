@@ -149,3 +149,7 @@ You have configured your Hibernate app to use second-level cache using JCache SP
 == See Also
 
 - {plugin-gh-address}[Hazelcast Hibernate Second Level Cache Plugin]
+- xref:hazelcast-hibernate-springboot:ROOT:index.adoc[Hazelcast L2C for Hibernate in SpringBoot]
+- xref:hazelcast-embedded-springboot:ROOT:index.adoc[Hazelcast in SpringBoot]
+
+
