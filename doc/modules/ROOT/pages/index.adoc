@@ -2,25 +2,15 @@
 :templates-url: templates:ROOT:page$/
 :plugin-gh-address: https://github.com/hazelcast/hazelcast-hibernate
 
-= JCache SPI for using Hazelcast as L2C for Hibernate
+= Getting Started with Hibernate Second-Level Cache and Hazelcast with JCache
 
-Configuration details to use JCache SPI for Hibernate Second Level Cache backed by Hazelcast IMDG.
+This guide will show you how to use Hazelcast IMDG as Hibernate's Second-Level Cache by leveraging Hibernate's https://www.javadoc.io/doc/javax.cache/cache-api/1.1.1[JCache (JSR 107)] support.
 
-You can find the code samples for entity cache, collection cache, and query cache use cases {github-address}[here.]
+You will have a chance to see how to integrate Hazelcast with Hibernate without using the `hazelcast-hibernate` integration.
 
 == What You’ll Learn
 
-You will be able to use Hibernate Second Level Cache using JCache SPI rather than `Hazelcast-hibernate` plugin.
-
-This is an alternative approach of using {plugin-gh-address}[Hazelcast-hibernate] plugin to use Hazelcast as the caching provider for Hibernate. Note that the local region caches supported by the plugin are not available here, unlike plugin - which stores query results locally. This approach supports query results to be stored in a distributed map.
-
-=== About Jcache
-
-https://www.javadoc.io/doc/javax.cache/cache-api/1.1.1[JCache (JSR 107)] is a standard caching API for Java.
-
-It provides an API for applications to be able to create and work with an in-memory cache of objects. Hibernate has
-started to support Jcache implementations for L2C with version 5.2. Using only a `CachingProvider` implementation,
-L2C can be used for `SessionFactory` objects in Hibernate.
+- How to use Hazelcast's distributed maps as entity/collection/query caches
 
 == Prerequisites
 
@@ -29,7 +19,9 @@ L2C can be used for `SessionFactory` objects in Hibernate.
 
 == Required Dependencies
 
-In `pom.xml`, include `hibernate-jcache` dependency having the same version with `hibernate-core` in your project:
+First, we need to add required dependencies.
+
+Let's include `hibernate-jcache` and `hibernate-core` dependencies. Keep in mind that both should have the same version:
 
 [source, xml]
 ----
@@ -40,7 +32,7 @@ In `pom.xml`, include `hibernate-jcache` dependency having the same version with
 </dependency>
 ----
 
-Make sure to include, the `hazelcast` dependency as well:
+Make sure to include the `hazelcast` dependency as well:
 
 [source, xml]
 ----
@@ -51,9 +43,11 @@ Make sure to include, the `hazelcast` dependency as well:
 </dependency>
 ----
 
-== Configuring Hibernate JCache Region Factory
+== Configuring Hibernate JCache RegionFactory
 
-Now tell Hibernate to use JCache region factory. For Hibernate 5.2.x:
+Now we need to tell Hibernate to use JCache's region factory.
+
+For Hibernate 5.2.x, you need to add a full class name:
 [source, xml]
 ----
 <property name="hibernate.cache.region.factory_class">
@@ -62,7 +56,7 @@ Now tell Hibernate to use JCache region factory. For Hibernate 5.2.x:
 ----
 
 
-For Hibernate 5.3.0 and higher:
+For Hibernate 5.3.x+, it's enough to mention _jcache_:
 [source, xml]
 ----
 <property name="hibernate.cache.region.factory_class">
@@ -70,14 +64,15 @@ For Hibernate 5.3.0 and higher:
 </property>
 ----
 
-== Confiuguring Cache Provider
+== Configuring the Cache Provider
 
-You can use either Hazelcast Embedded or Client/Server mode as the cache provider.
+You can choose to either use an embedded Hazelcast instance, or connect to an external server using Hazelcast Client.
 
 ****
 `CLIENT`: You can connect to an existing Hazelcast cluster and store the cache data there. Then you can scale the cluster
-up or down independently from your app. Data resides in L2C can be available even a SessionFactory is closed
-, or application is shut down. So this makes L2C available across SessionFactories and Hibernate applications.
+up or down independently from your app.
+
+Data residing in a cache is available even when a `SessionFactory` is closed or application is shut down. So this makes L2C available across SessionFactories and Hibernate applications.
 
 `EMBEDDED`: A new Hazelcast instance is created along with your application. This instance cannot be scaled up or
 down unless you run or shutdown another Hibernate application with the same server config. The latency of communicating to
@@ -87,7 +82,9 @@ Hazelcast Cluster will be less than the client mode.
 ****
 
 
-Now configure the provider in Hibernate configuration. To use native client:
+Now let's configure the provider.
+
+To use native client:
 
 [source, xml]
 ----
@@ -99,7 +96,7 @@ Now configure the provider in Hibernate configuration. To use native client:
 </property>
 ----
 
-To use embedded Hazelcast instance:
+To use embedded Hazelcast:
 
 [source, xml]
 ----
@@ -111,12 +108,10 @@ To use embedded Hazelcast instance:
 </property>
 ----
 
-You can configure your Hazelcast instances over `hazelcast.xml` or `hazelcast-client.xml`.
-
 
 == Cache Configuration
 
-Configure the cache via `hazelcast.xml`, `<cache>` part:
+Configure the cache via `hazelcast.xml` and the `<cache>` part:
 
 [source, xml]
 ----
@@ -133,7 +128,7 @@ NOTE: To track the cache statistics on Hazelcast Management Center, you have to 
 NOTE: If client mode is used, cache configurations must be set on the server configuration (`hazelcast.xml`), not on the client-side (`hazelcast-client.xml`).
 
 TIP: If you do not define a specific region name, the default cache configuration is going to be
-used for this region. Hence it will not be visible on Hazelcast Management Center. To apply
+used. Hence it will not be visible on Hazelcast Management Center. To apply
 a config to all regions, you can use a wildcard for `name` property (e.g., `name="*"`).
 
 For other cache configuration properties, see cache configuration section on the documentation
@@ -143,7 +138,9 @@ Eviction size and policy properties might be useful for this case.
 
 == Summary
 
-You have configured your Hibernate app to use second-level cache using JCache SPI backed by Hazelcast. Now you can see Hibernate storing fetched objects from the database in the second-level cache and serving them if available. You can find the code samples for entity cache, collection cache, and query cache use cases {github-address}[here.]
+We've configured an application to use Hibernate's Second-Level cache with Hazelcast.
+
+You can find the code samples for entity cache, collection cache, and query cache use cases {github-address}[here.]
 
 
 == See Also
@@ -151,5 +148,3 @@ You have configured your Hibernate app to use second-level cache using JCache SP
 - {plugin-gh-address}[Hazelcast Hibernate Second Level Cache Plugin]
 - xref:springboot-hibernate:ROOT:index.adoc[Hazelcast L2C for Hibernate in SpringBoot]
 - xref:hazelcast-embedded-springboot:ROOT:index.adoc[Hazelcast in SpringBoot]
-
-
