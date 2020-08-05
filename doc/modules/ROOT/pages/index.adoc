@@ -69,14 +69,10 @@ For Hibernate 5.3.x+, it's enough to mention _jcache_:
 You can choose to either use an embedded Hazelcast instance, or connect to an external server using Hazelcast Client.
 
 ****
-`CLIENT`: You can connect to an existing Hazelcast cluster and store the cache data there. Then you can scale the cluster
-up or down independently from your app.
+`EMBEDDED`: For creating an embedded Hazelcast instance with an application. This instance cannot be scaled up or
+down unless you run or shutdown another Hibernate application with the same server config.
 
-Data residing in a cache is available even when a `SessionFactory` is closed or application is shut down. So this makes L2C available across SessionFactories and Hibernate applications.
-
-`EMBEDDED`: A new Hazelcast instance is created along with your application. This instance cannot be scaled up or
-down unless you run or shutdown another Hibernate application with the same server config. The latency of communicating to
-Hazelcast Cluster will be less than the client mode.
+`CLIENT`: For connecting to an existing Hazelcast cluster that can scale up or down independently from your app.
 
 - You can learn more about the differences between client and embedded topologies https://docs.hazelcast.org/docs/latest/manual/html-single/#hazelcast-topology[here.]
 ****
