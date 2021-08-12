@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <hazelcast.version>4.2.1</hazelcast.version>
+        <hazelcast.version>4.2.2</hazelcast.version>
         <hibernate.version>5.4.29.Final</hibernate.version>
         <h2db.version>1.4.200</h2db.version>
         <junit.version>4.13.2</junit.version>
