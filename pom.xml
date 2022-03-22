@@ -35,7 +35,7 @@
             <artifactId>hazelcast</artifactId>
             <version>${hazelcast.version}</version>
         </dependency>
-        <!-- end::doc-hazelcast-dep -->
+        <!-- end::doc-hazelcast-dep[] -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
