@@ -27,7 +27,9 @@
         <!-- Enable Jcache SPI -->
 
             <!-- For Hibernate 5.3.0 and higher -->
+            <!-- tag::doc-hibernate-factory -->
             <property name="hibernate.cache.region.factory_class">jcache</property>
+            <!-- end::doc-hibernate-factory -->
 
             <!-- For Hibernate 5.2.x -->
             <!-- property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.JCacheRegionFactory</property -->

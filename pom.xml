@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!-- tag::doc-hibernate-deps[] -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -27,11 +28,14 @@
             <artifactId>hibernate-jcache</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        <!-- end::doc-hibernate-deps[] -->
+        <!-- tag::doc-hazelcast-dep[] -->
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
             <version>${hazelcast.version}</version>
         </dependency>
+        <!-- end::doc-hazelcast-dep -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -1,3 +1,0 @@
-name: hibernate-jcache
-title: Jcache SPI for using Hazelcast as L2C for Hibernate
-version: master
