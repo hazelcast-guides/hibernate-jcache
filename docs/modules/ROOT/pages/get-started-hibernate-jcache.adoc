@@ -35,7 +35,7 @@ Make sure to include the `hazelcast` dependency as well:
 .pom.xml
 [source,xml,indent=0]
 ----
-include::ROOT:example$hibernate-jcache/pom.xml[tag=doc-hazelcast-deps]
+include::ROOT:example$hibernate-jcache/pom.xml[tag=doc-hazelcast-dep]
 ----
 
 == Configure Hibernate JCache RegionFactory
