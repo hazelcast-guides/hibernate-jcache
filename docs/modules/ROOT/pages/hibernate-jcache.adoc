@@ -1,6 +1,6 @@
 = Get Started with Hazelcast as a Hibernate Second-Level Cache with JCache
 :page-layout: tutorial
-:page-product: platform
+:page-product: imdg
 :page-categories: Caching, Getting Started, Hibernate, JCache
 :page-lang: java
 :page-edition: 
