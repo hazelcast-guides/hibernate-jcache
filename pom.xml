@@ -10,7 +10,7 @@
 
     <properties>
         <hazelcast.version>4.2.2</hazelcast.version>
-        <hibernate.version>5.4.29.Final</hibernate.version>
+        <hibernate.version>5.6.14.Final</hibernate.version>
         <h2db.version>1.4.200</h2db.version>
         <junit.version>4.13.2</junit.version>
         <surefire.version>2.22.2</surefire.version>
